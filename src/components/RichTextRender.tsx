@@ -59,7 +59,7 @@ function renderBlock(
         "type" in child && (child.type === "text" || child.type === "link"),
     )
   ) {
-    throw new Error("Invalid children type");
+    return null;
   }
 
   return (
@@ -117,7 +117,7 @@ function renderQuote(block: Quote, index: number) {
   return (
     <blockquote
       key={index}
-      className="bg-gradient-horizontal rounded-md p-4 text-base text-white"
+      className="bg-gradient-horizontal w-max rounded-md bg-gray-900 p-4 text-base text-white"
     >
       <div className="border-l-4 border-white pl-4">
         {block.children.map((child, childIndex) =>
@@ -147,6 +147,22 @@ function renderImage(block: ImageBlock, index: number) {
   );
 }
 
+// Function to render code blocks
+function renderCode(block: CodeBlock, index: number) {
+  const codeContent = block.children[0]?.text;
+
+  if (!codeContent) return null;
+
+  return (
+    <pre
+      key={index}
+      className="overflow-x-auto rounded-md bg-gray-900 p-4 text-base text-white"
+    >
+      <code className="language-ts">{codeContent}</code>
+    </pre>
+  );
+}
+
 // Main component to render rich text blocks
 export default function RichTextRenderer({
   blocks,
@@ -159,7 +175,9 @@ export default function RichTextRenderer({
         switch (block.type) {
           case "paragraph":
             return renderBlock(block, index, (children) => (
-              <p className="text-base">{children.map(renderChild)}</p>
+              <p className="text-base text-white">
+                {children.map(renderChild)}
+              </p>
             ));
           case "heading":
             return renderHeading(block, index);
@@ -169,6 +187,8 @@ export default function RichTextRenderer({
             return renderQuote(block, index);
           case "image":
             return renderImage(block, index);
+          case "code":
+            return renderCode(block, index);
           default:
             return null;
         }

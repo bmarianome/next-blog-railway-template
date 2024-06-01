@@ -87,5 +87,10 @@ declare global {
     children: (TextChild | LinkChild)[];
   }
 
-  type RichTextBlock = Paragraph | Heading | List | ImageBlock | Quote;
+  interface CodeBlock {
+    type: "code";
+    children: TextChild[];
+  }
+
+  type RichTextBlock = Paragraph | Heading | List | ImageBlock | Quote | CodeBlock;
 }
