@@ -8,7 +8,7 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
-    API_URL: z.string().url().min(1),
+    API_URL: z.string().min(1),
   },
 
   /**
