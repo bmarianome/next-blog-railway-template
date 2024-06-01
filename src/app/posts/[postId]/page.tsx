@@ -7,6 +7,8 @@ import { ChevronLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { env } from "~/env";
 
+export const dynamic = "force-dynamic";
+
 const query = qs.stringify({
   populate: {
     metadata: {
