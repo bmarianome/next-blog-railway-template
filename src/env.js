@@ -28,7 +28,7 @@ export const env = createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     API_URL: process.env.API_URL,
-    AWS_BUCKET_HOSTNAME: process.env.BUCKET_HOSTNAME,
+    AWS_BUCKET_HOSTNAME: process.env.AWS_BUCKET_HOSTNAME,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
