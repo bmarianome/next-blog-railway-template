@@ -2,33 +2,32 @@ import RichTextRenderer from "~/components/RichTextRender";
 import Container from "~/components/Container";
 import Image from "next/image";
 import Link from "next/link";
-import qs from "qs";
 import { ChevronLeft } from "lucide-react";
 import { notFound } from "next/navigation";
-import { env } from "~/env";
+import getStrapiUrl from "~/lib/getStrapiUrl";
 
-export const dynamic = "force-dynamic";
-
-const query = qs.stringify({
-  populate: {
-    metadata: {
-      populate: {
-        authors: {
-          populate: {
-            image: {
-              fields: ["url"],
+async function getBlog(id: string) {
+  const query = {
+    populate: {
+      metadata: {
+        populate: {
+          authors: {
+            populate: {
+              image: {
+                fields: ["url"],
+              },
             },
           },
         },
       },
     },
-  },
-});
+  };
 
-async function getBlog(id: string) {
-  return await fetch(`${env.API_URL}/blog-posts/${id}?${query}`).then(
-    (res) => res.json() as Promise<BackendResponse<Post>>,
-  );
+  const url = getStrapiUrl({ path: `/blog-posts/${id}`, query });
+
+  return await fetch(url, {
+    cache: "no-store",
+  }).then((res) => res.json() as Promise<StrapiResponse<Post>>);
 }
 
 export async function generateMetadata({

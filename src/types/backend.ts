@@ -1,5 +1,5 @@
 declare global {
-  interface BackendResponse<T> {
+  interface StrapiResponse<T> {
     data: T | null;
     error:
       | {
@@ -11,43 +11,38 @@ declare global {
       | undefined;
   }
 
-  interface Post {
+  interface StrapiObject<T> {
     id: number;
-    attributes: {
-      createdAt: string;
-      updatedAt: string;
-      metadata: PostMetadata;
-      post: RichTextBlock[];
-    };
+    attributes: T;
   }
 
+  type Post = StrapiObject<{
+    createdAt: string;
+    updatedAt: string;
+    metadata: PostMetadata;
+    post: RichTextBlock[];
+  }>;
+
   interface PostMetadata {
-    id: number;
     title: string;
     description: string;
     category: Category;
     authors: {
-      data: Author[]
-    }
-  }
-
-  interface Author {  
-    id: number;
-    attributes: {
-      name: string;
-      role: string;
-      image: {
-        data: StrapiFile;
-      }
-    }
-  }
-
-  interface StrapiFile {
-    id: number;
-    attributes: {
-      url: string;
+      data: Author[];
     };
   }
+
+  type Author = StrapiObject<{
+    name: string;
+    role: string;
+    image: {
+      data: StrapiFile;
+    };
+  }>
+
+  type StrapiFile = StrapiObject<{
+    url: string;
+  }>;
 
   type Category = "Technology" | "Design" | "Business";
 }

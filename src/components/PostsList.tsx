@@ -1,30 +1,31 @@
 import Link from "next/link";
-import qs from "qs";
 import Image from "next/image";
-import { env } from "~/env";
+import getStrapiUrl from "~/lib/getStrapiUrl";
 
-const query = qs.stringify({
-  fields: ["createdAt", "updatedAt"],
-  populate: {
-    metadata: {
-      populate: {
-        authors: {
-          fields: ["image"],
-          populate: {
-            image: {
-              fields: ["url"],
+async function getPosts() {
+  const query = {
+    fields: ["createdAt", "updatedAt"],
+    populate: {
+      metadata: {
+        populate: {
+          authors: {
+            fields: ["image"],
+            populate: {
+              image: {
+                fields: ["url"],
+              },
             },
           },
         },
       },
     },
-  },
-});
+  };
 
-async function getPosts() {
-  return fetch(`${env.API_URL}/blog-posts?${query}`).then(
-    (res) => res.json() as Promise<BackendResponse<Post[]>>,
-  );
+  const url = getStrapiUrl({ path: "/blog-posts", query });
+
+  return fetch(url, {
+    cache: "no-store",
+  }).then((res) => res.json() as Promise<StrapiResponse<Post[]>>);
 }
 
 export default async function PostsList() {

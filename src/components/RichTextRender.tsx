@@ -131,13 +131,11 @@ function renderQuote(block: Quote, index: number) {
 // Function to render image blocks
 function renderImage(block: ImageBlock, index: number) {
   return (
-    <div
-      key={index}
-      className="bg-gradient-horizontal aspect-[16/9] max-w-2xl overflow-hidden rounded-2xl p-1"
-    >
+    <div key={index} className="max-w-4xl overflow-hidden rounded-2xl p-1">
       <div className="relative h-full w-full">
         <Image
-          fill
+          width={block.image.width}
+          height={block.image.height}
           src={block.image.url}
           alt={block.image.alternativeText || ""}
           className="rounded-xl object-cover object-center"
