@@ -82,9 +82,11 @@ export default async function PostPage({
 
         <div className="mb-8 mt-12 border-b border-gray-700 pb-4">
           <div className="flex flex-col">
-            <p className="text-sm capitalize text-gray-400">
-              {metadata.category}
-            </p>
+            {metadata.category && (
+              <p className="text-sm capitalize text-gray-400">
+                {metadata.category}
+              </p>
+            )}
             <h2 className="text-2xl font-bold tracking-tight text-white">
               {metadata.title}
             </h2>
@@ -111,7 +113,7 @@ export default async function PostPage({
               </div>
             )}
 
-            <span className="inline-block mt-4 text-base text-gray-400">
+            <span className="mt-4 inline-block text-base text-gray-400">
               {new Date(data.attributes.createdAt).toLocaleDateString(
                 undefined,
                 {

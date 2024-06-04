@@ -64,7 +64,9 @@ function Post({ post }: { post: Post }) {
 
   return (
     <Link className="block" href={`/posts/${post.id}`}>
-      <p className="text-sm capitalize text-gray-400">{metadata.category}</p>
+      {metadata.category && (
+        <p className="text-sm capitalize text-gray-400">{metadata.category}</p>
+      )}
       <h2 className="text-2xl font-bold tracking-tight text-white">
         {metadata.title}
       </h2>
@@ -118,8 +120,12 @@ function ForbiddenError() {
               Option 1:
             </p>
             <p className="mt-4 text-start text-white">
-              See this{" "}
-              <Link className="underline" href="/">
+              See this 25s{" "}
+              <Link
+                className="underline"
+                target="_blank"
+                href="https://blog-railway-template.s3.us-east-1.amazonaws.com/configure_permissions_tutorial_de2bde73e2.mp4"
+              >
                 video tutorial
               </Link>{" "}
               to configure the permissions.

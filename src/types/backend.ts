@@ -26,7 +26,7 @@ declare global {
   interface PostMetadata {
     title: string;
     description: string;
-    category: Category;
+    category?: string;
     authors: {
       data: Author[] | null;
     };
@@ -43,6 +43,4 @@ declare global {
   type StrapiFile = StrapiObject<{
     url: string;
   }>;
-
-  type Category = "Technology" | "Design" | "Business";
 }
