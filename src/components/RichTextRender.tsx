@@ -162,11 +162,9 @@ function renderCode(block: CodeBlock, index: number) {
 }
 
 // Main component to render rich text blocks
-export default function RichTextRenderer({
-  blocks,
-}: {
-  blocks: RichTextBlock[];
-}) {
+export default function RichTextRenderer({ post }: { post: Post }) {
+  const { post: blocks } = post.attributes;
+
   return (
     <div className="flex flex-col gap-4">
       {blocks.map((block, index) => {
