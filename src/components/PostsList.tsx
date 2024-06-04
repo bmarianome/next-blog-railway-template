@@ -45,7 +45,7 @@ export default async function PostsList() {
   return (
     <div className="grid gap-8 md:grid-cols-2 lg:gap-24">
       {data.length === 0 && (
-        <div className="flex flex-col items-center gap-2 py-12 text-center col-span-full">
+        <div className="col-span-full flex flex-col items-center gap-2 py-12 text-center">
           <p className="text-2xl font-bold tracking-tight text-white">
             There are no posts yet
           </p>
@@ -70,21 +70,23 @@ function Post({ post }: { post: Post }) {
       </h2>
 
       <div className="mt-4 flex items-center gap-2">
-        <div className="flex items-center -space-x-2">
-          {metadata.authors.data.map((author) => (
-            <div
-              key={author.id.toString()}
-              className="relative h-7 w-7 overflow-hidden rounded-full border border-black bg-gray-500"
-            >
-              <Image
-                fill
-                src={author.attributes.image.data.attributes.url}
-                alt={author.attributes.name}
-                className="object-cover object-center"
-              />
-            </div>
-          ))}
-        </div>
+        {metadata.authors.data && (
+          <div className="flex items-center -space-x-2">
+            {metadata.authors.data.map((author) => (
+              <div
+                key={author.id.toString()}
+                className="relative h-7 w-7 overflow-hidden rounded-full border border-black bg-gray-500"
+              >
+                <Image
+                  fill
+                  src={author.attributes.image.data.attributes.url}
+                  alt={author.attributes.name}
+                  className="object-cover object-center"
+                />
+              </div>
+            ))}
+          </div>
+        )}
         <span className="text-base text-gray-400">
           {new Date(post.attributes.createdAt).toLocaleDateString(undefined, {
             year: "numeric",

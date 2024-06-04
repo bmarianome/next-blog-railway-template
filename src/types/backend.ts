@@ -28,7 +28,7 @@ declare global {
     description: string;
     category: Category;
     authors: {
-      data: Author[];
+      data: Author[] | null;
     };
   }
 

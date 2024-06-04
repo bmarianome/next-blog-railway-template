@@ -89,26 +89,29 @@ export default async function PostPage({
               {metadata.title}
             </h2>
 
-            <div className="mt-4 flex items-center gap-3">
-              {metadata.authors.data.map((author) => (
-                <div className="flex items-center" key={author.id.toString()}>
-                  <div className="relative h-7 w-7 overflow-hidden rounded-full border border-black bg-gray-500">
-                    <Image
-                      fill
-                      src={author.attributes.image.data.attributes.url}
-                      alt={author.attributes.name}
-                      className="object-cover object-center"
-                    />
+            {metadata.authors.data && (
+              <div className="mt-4 flex items-center gap-3">
+                {metadata.authors.data.map((author) => (
+                  <div className="flex items-center" key={author.id.toString()}>
+                    <div className="relative h-7 w-7 overflow-hidden rounded-full border border-black bg-gray-500">
+                      <Image
+                        fill
+                        src={author.attributes.image.data.attributes.url}
+                        alt={author.attributes.name}
+                        className="object-cover object-center"
+                      />
+                    </div>
+                    <div className="ml-2">
+                      <p className="text-sm text-white">
+                        {author.attributes.name}
+                      </p>
+                    </div>
                   </div>
-                  <div className="ml-2">
-                    <p className="text-sm text-white">
-                      {author.attributes.name}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <span className="mt-4 text-base text-gray-400">
+                ))}
+              </div>
+            )}
+
+            <span className="inline-block mt-4 text-base text-gray-400">
               {new Date(data.attributes.createdAt).toLocaleDateString(
                 undefined,
                 {
