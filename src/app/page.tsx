@@ -1,8 +1,6 @@
 import Container from "~/components/Container";
 import PostsList from "~/components/PostsList";
 
-export const dynamic = "force-dynamic";
-
 export default function HomePage() {
   return (
     <div className="min-h-svh bg-black">

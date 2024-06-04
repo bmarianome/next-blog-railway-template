@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Blog",
     description: "Blog template",
-    // url: "https://onasgroup.com.ar",
+    // url: "https://your-domain.com.ar",
     siteName: "Blog",
     // images: [
     //   {

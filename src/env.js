@@ -7,11 +7,14 @@ export const env = createEnv({
     API_URL: z.string().min(1),
     AWS_BUCKET_HOSTNAME: z.string().min(1),
   },
-  client: {},
+  client: {
+    NEXT_PUBLIC_ADMIN_URL: z.string().min(1),
+  },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     API_URL: process.env.API_URL,
     AWS_BUCKET_HOSTNAME: process.env.AWS_BUCKET_HOSTNAME,
+    NEXT_PUBLIC_ADMIN_URL: process.env.NEXT_PUBLIC_ADMIN_URL,
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
   emptyStringAsUndefined: true,
