@@ -45,7 +45,7 @@ export default async function PostsList() {
   return (
     <div className="grid gap-8 md:grid-cols-2 lg:gap-24">
       {data.length === 0 && (
-        <div className="flex flex-col items-center gap-2 py-12 text-center">
+        <div className="flex flex-col items-center gap-2 py-12 text-center col-span-full">
           <p className="text-2xl font-bold tracking-tight text-white">
             There are no posts yet
           </p>
