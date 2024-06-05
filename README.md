@@ -1,29 +1,17 @@
-# Create T3 App
+# Blog: Next.js + Strapi 
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A production-ready blog built with **Nextjs 14** (App Router, RSC) and **Strapi CMS** configured to host files in a S3 Bucket
 
-## What's next? How do I make an app with this?
+Live example at: [blog.bmariano.me](https://blog.bmariano.me)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Important:
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+It's optional to add the AWS S3 variables, the deployment will complete, but the files will be saved in the deployment file system, therefore, if you update or redeploy the Strapi Admin, **the files will be lost**.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+To make Strapi host the files in a S3 Bucket, [follow the instructions of this post](https://blog.bmariano.me/posts/1).
 
-## Learn More
+## Feedback
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+If you have any questions, need help setting this up, or would like to provide feedback on this template, feel free to send me an email at bmariano.me@gmail.com
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+I will be uploading updates regularly!
