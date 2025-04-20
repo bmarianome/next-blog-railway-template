@@ -6,7 +6,13 @@ import { ChevronLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import getStrapiUrl from "~/lib/getStrapiUrl";
 
-async function getBlog(id: string) {
+async function getBlog(props: { params: { postId: string } }) {
+  const { postId } = props.params;
+
+  const id = postId.split("-").shift();
+
+  if (!id) return notFound();
+
   const query = {
     populate: {
       metadata: {
@@ -25,51 +31,30 @@ async function getBlog(id: string) {
 
   const url = getStrapiUrl({ path: `/blog-posts/${id}`, query });
 
-  return await fetch(url, {
+  const { data, error } = await fetch(url, {
     cache: "no-store",
   }).then((res) => res.json() as Promise<StrapiResponse<Post>>);
+
+  if (!data || error) notFound();
+
+  return data;
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { postId: string };
-}) {
-  const id = params.postId.split("-").shift();
-
-  if (!id) return notFound();
-
-  const { data, error } = await getBlog(id);
-
-  if (!data || error) {
-    return notFound();
-  }
+export async function generateMetadata(props: { params: { postId: string } }) {
+  const post = await getBlog(props);
 
   return {
-    title: data.attributes.metadata.title,
-    description: data.attributes.metadata.description,
+    title: post.attributes.metadata.title,
+    description: post.attributes.metadata.description,
   };
 }
 
-export default async function PostPage({
-  params,
-}: {
-  params: { postId: string };
-}) {
-  const id = params.postId.split("-").shift();
-
-  if (!id) return notFound();
-
-  const { data: post, error } = await getBlog(id);
-
-  if (!post || error) {
-    return notFound();
-  }
+export default async function PostPage(props: { params: { postId: string } }) {
+  const post = await getBlog(props);
 
   return (
     <div className="min-h-svh bg-black">
       <Container className="py-12 md:py-24 lg:max-w-6xl lg:py-32">
-        {/* BACK BTTON */}
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-gray-200"
@@ -90,7 +75,7 @@ function PostHeader({ post }: { post: Post }) {
 
   return (
     <div className="mb-8 mt-12 border-b border-gray-700 pb-4">
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end">
+      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-2xl">
           {metadata.category && (
             <p className="text-sm capitalize text-gray-400">
@@ -103,7 +88,7 @@ function PostHeader({ post }: { post: Post }) {
           <p className="mt-4 text-sm text-gray-400">{metadata.description}</p>
         </div>
 
-        <div className="flex flex-col lg:items-end gap-2">
+        <div className="flex flex-col gap-2 lg:items-end">
           {metadata.authors.data && (
             <div className="mt-4 flex items-center gap-3">
               {metadata.authors.data.map((author) => (

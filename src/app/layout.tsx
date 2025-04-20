@@ -2,53 +2,39 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import type { Metadata, Viewport } from "next";
+import { env } from "~/env";
 
 export const viewport: Viewport = {
   width: "device-width",
   themeColor: "#000",
 };
 
+const faviconUrl = env.FAVICON_URL ?? "/favicon.ico";
+const blogTitle = env.BLOG_TITLE;
+const blogDescription = env.BLOG_DESCRIPTION;
+
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Blog template",
+  title: blogTitle,
+  description: blogDescription,
 
   icons: {
-    icon: {
-      url: "/favicon.ico",
-    },
-    shortcut: {
-      url: "/favicon.ico",
-    },
-    apple: [
-      {
-        url: "/favicon.ico",
-      },
-    ],
+    icon: { url: faviconUrl },
+    shortcut: { url: faviconUrl },
+    apple: [{ url: faviconUrl }],
   },
 
   openGraph: {
-    title: "Blog",
-    description: "Blog template",
-    // url: "https://your-domain.com.ar",
-    siteName: "Blog",
-    // images: [
-    //   {
-    //     url: "/social-media-card.png",
-    //     width: 1200,
-    //     height: 600,
-    //   },
-    // ],
+    title: blogTitle,
+    description: blogDescription,
+    siteName: blogTitle,
     locale: "es-AR",
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Blog",
-    description: "Blog template",
-    // images: {
-    //   url: "/social-media-card.png",
-    // },
+    title: blogTitle,
+    description: blogDescription,
   },
 
   authors: [{ name: "bmariano", url: "https://bmariano.me" }],
